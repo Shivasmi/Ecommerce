@@ -3,10 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User 
 
 # Create your models here.
-from django.conf import settings 
-from django.db import models
-
-# Create your models here.
 class Item(models.Model):
     title = models.CharField(max_length=150)
     price = models.FloatField()
@@ -42,3 +38,11 @@ class Customer (models.Model):
 
     def __str__(self):
         return self.user.first_name
+    
+class Feedback(models.Model):
+    name = models.CharField(max_length=50)
+    feedback= models.CharField(max_length=300)
+    date= models.DateField(auto_now_add=True, blank= True)
+
+    def __str__(self):
+        return self.name
