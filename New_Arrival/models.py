@@ -46,3 +46,23 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.name
+    
+class NewArrivals(models.Model):
+    brand = models.CharField(max_length=50)
+    categories = models.ManyToManyField(to= 'NewArrivals')
+    descriptions = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    is_new_arrival = models.BooleanField(default= False)
+    image = models.ImageField(upload_to= 'newarrival_images/')
+
+    def __str__(self):
+        return self.brand
+    
+class Order_details(models.Model):
+    order = models.CharField(max_length=100)
+    num_of_item = models.IntegerField(max_length=50)
+    total_summary = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.order
+    
