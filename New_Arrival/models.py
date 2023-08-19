@@ -60,9 +60,11 @@ class NewArrivals(models.Model):
     
 class Order_details(models.Model):
     order = models.CharField(max_length=100)
-    num_of_item = models.IntegerField(max_length=50)
+    num_of_item = models.IntegerField()
     total_summary = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.order
+    
+    
     

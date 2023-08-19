@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Item, Order_details
+from .models import Item, Order_details, Feedback, NewArrivals 
 # Create your views here.
 
 def item_list(request): 
@@ -15,3 +15,17 @@ def Order_details(request):
     }
 
     return render (request, "order_details.html", context)
+def feedback(request):
+    context = { 
+        feedback : Feedback.objects.all()
+    }
+    return render (request, "feedback.html", context)
+
+
+def newarrivals(request):
+    context = {
+        newarrivals : NewArrivals.objects.all()
+    }
+    return render( request, "newarrivals.html", context )
+
+
