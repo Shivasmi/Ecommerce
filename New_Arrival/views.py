@@ -2,6 +2,12 @@ from django.shortcuts import render
 from .models import Item, Order_details, Feedback, NewArrivals 
 # Create your views here.
 
+def home (request): 
+    return render (request, 'home.html')
+
+def base (request):
+    return render (request, 'base.html')
+
 def item_list(request): 
     context = {
         'items' : Item.objects.all()
@@ -11,7 +17,7 @@ def item_list(request):
 
 def Order_details(request):
     context = { 
-        Order_details: Order_details.objects.all()
+        "order_details" : Order_details.objects.all()
     }
 
     return render (request, "order_details.html", context)
