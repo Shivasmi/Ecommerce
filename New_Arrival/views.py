@@ -2,11 +2,8 @@ from django.shortcuts import render
 from .models import Item, Order_details, Feedback, NewArrivals 
 # Create your views here.
 
-def home (request): 
+def home(request):
     return render (request, 'home.html')
-
-def base (request):
-    return render (request, 'base.html')
 
 def item_list(request): 
     context = {
