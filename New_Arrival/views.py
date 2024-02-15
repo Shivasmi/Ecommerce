@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login 
 from .models import Item, Order, Feedback, NewArrivals, Customer
+from .forms import SignupForm, LoginForm, NewItemForm
+
 # Create your views here.
 
 def home(request):
@@ -38,4 +42,36 @@ def newarrivals(request):
     }
     return render( request, "newarrivals.html", context )
 
+def signup (request):
+    if request.method == "POST":
+        form = SignupForm(request.POST)
 
+        if form.is_valid():
+            form.save()
+
+            return redirect('/login/')
+        
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html',{'form':form})
+
+def login (request):
+    form = LoginForm()
+    return render (request, 'login.html',{'form':form})
+
+
+def new(request):
+    if request.method == "POST":
+        form = NewItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            NewArrivals = form.save(commit=False)
+            NewArrivals.created_by = request.user
+            NewArrivals.save()
+
+            form.save()
+            print ('you have sucessfully saved the new items')
+            return redirect(request, 'new.html')
+    else:
+        form =NewItemForm()
+
+    return render (request,'new.html', {'form':form ,'title':'New Item' } )
